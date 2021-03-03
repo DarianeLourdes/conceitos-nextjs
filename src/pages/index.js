@@ -1,16 +1,6 @@
-import { useEffect, useState } from 'react'
 import { Title } from '../styles/pages/Home';
 
-export default function Home() {
-  const [recommendedProducts, setRecommendedProducts] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:3333/recommended').then(response => {
-      response.json().then(data => {
-        setRecommendedProducts(data);
-      })
-    });
-  }, []);
+export default function Home({ recommendedProducts }) {
 
   return (
    <div>
@@ -29,4 +19,15 @@ export default function Home() {
      </section>
    </div>
   )
+}
+
+export const getServerSideProps = async () => {
+  const response = await fetch('http://localhost:3333/recommended')
+  const recommendedProducts = await response.json();
+    
+  return {
+    props: {
+      recommendedProducts
+    }
+  }
 }
