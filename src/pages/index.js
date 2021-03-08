@@ -1,6 +1,12 @@
 import { Title } from '../styles/pages/Home';
 
 export default function Home({ recommendedProducts }) {
+  async function handleSum() {
+    const math = (await import('../lib/math')).default;
+
+    alert(math.sum(3, 5));
+  }
+
 
   return (
    <div>
@@ -17,6 +23,8 @@ export default function Home({ recommendedProducts }) {
           })}
         </ul>
      </section>
+
+     <button onClick={handleSum}>Sum!</button>
    </div>
   )
 }
