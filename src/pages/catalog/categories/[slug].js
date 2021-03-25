@@ -56,7 +56,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async(context) => {
   const { slug } = context.params;
 
-  const category = await client().getByUID('category', slug);
+  const category = await client().getByUID('category', slug, {});
 
   const products = await client().query([
     Prismic.Predicates.at('document.type', 'product'),
